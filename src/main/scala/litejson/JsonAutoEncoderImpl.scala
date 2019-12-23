@@ -2,9 +2,9 @@ package litejson
 
 import scala.reflect.macros.whitebox.Context
 
-object AutoEncoderImpl {
+object JsonAutoEncoderImpl {
 
-  def apply[T: c.WeakTypeTag](c: Context): c.Expr[Encoder[T]] = {
+  def apply[T: c.WeakTypeTag](c: Context): c.Expr[JsonEncoder[T]] = {
     import c.universe._
 
     val tag = weakTypeTag[T]
@@ -22,7 +22,7 @@ object AutoEncoderImpl {
 
     val code: String =
       s"""
-      |implicit object AnonAutoEncoder extends Encoder[${tag.tpe.toString}] {
+      |implicit object AnonAutoEncoder extends JsonEncoder[${tag.tpe.toString}] {
       |  override def encode(value: ${tag.tpe.toString}): JsValue = Json.obj(
       |    ${fields.map(_.expression).mkString(",\n    ")}
       |  )
@@ -31,7 +31,7 @@ object AutoEncoderImpl {
       |""".stripMargin
     // println(code) // DEBUG
 
-    c.Expr[Encoder[T]](c.parse(code))
+    c.Expr[JsonEncoder[T]](c.parse(code))
   }
 
 }

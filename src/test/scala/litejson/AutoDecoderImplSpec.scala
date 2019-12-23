@@ -16,7 +16,7 @@ class AutoDecoderImplSpec extends FlatSpec with Matchers {
       "age"  -> Json.num(42)
     )
 
-    implicit val personDecoder: Decoder[Person] = Json.autoDecoder[Person]
+    implicit val personDecoder: JsonDecoder[Person] = Json.autoDecoder[Person]
 
     val reuslt: Option[Person] = json.as[Person]
     val answer                 = Some(Person("Bob", 42))
@@ -39,7 +39,7 @@ class AutoDecoderImplSpec extends FlatSpec with Matchers {
       "friend" -> Json.nul
     )
 
-    implicit val personDecoder: Decoder[Person] = Json.autoDecoder[Person]
+    implicit val personDecoder: JsonDecoder[Person] = Json.autoDecoder[Person]
 
     val reuslt: Option[Person] = json.as[Person]
     val answer                 = Some(Person("Bob", 42, None))
@@ -62,7 +62,7 @@ class AutoDecoderImplSpec extends FlatSpec with Matchers {
       "friend" -> Json.nul
     )
 
-    implicit val personDecoder: Decoder[Person] = Json.autoDecoder[Person]
+    implicit val personDecoder: JsonDecoder[Person] = Json.autoDecoder[Person]
 
     val reuslt: Option[Person] = json.as[Person]
     val answer                 = Some(Person("Bob", 42, None))
@@ -85,7 +85,7 @@ class AutoDecoderImplSpec extends FlatSpec with Matchers {
       "friends" -> Json.arr()
     )
 
-    implicit val personDecoder: Decoder[Person] = Json.autoDecoder[Person]
+    implicit val personDecoder: JsonDecoder[Person] = Json.autoDecoder[Person]
 
     val reuslt: Option[Person] = json.as[Person]
     val answer                 = Some(Person("Bob", 42, Nil))
@@ -124,10 +124,10 @@ class AutoDecoderImplSpec extends FlatSpec with Matchers {
       )
     )
 
-    implicit val locationDecoder: Decoder[Location] = Json.autoDecoder[Location]
-    implicit val residentDecoder: Decoder[Resident] = Json.autoDecoder[Resident]
-    implicit val fooDecoder: Decoder[Foo]           = Json.autoDecoder[Foo]
-    val result: Option[Foo]                         = json.as[Foo]
+    implicit val locationDecoder: JsonDecoder[Location] = Json.autoDecoder[Location]
+    implicit val residentDecoder: JsonDecoder[Resident] = Json.autoDecoder[Resident]
+    implicit val fooDecoder: JsonDecoder[Foo]           = Json.autoDecoder[Foo]
+    val result: Option[Foo]                             = json.as[Foo]
     val answer = Some(
       Foo(
         "Watership Down",
@@ -156,8 +156,8 @@ class AutoDecoderImplSpec extends FlatSpec with Matchers {
   //     "foo" -> Json.nul
   //   )
 
-  //   implicit val fooDecoder: Decoder[Foo] = Json.autoDecoder[Foo]
-  //   implicit val barDecoder: Decoder[Bar] = Json.autoDecoder[Bar]
+  //   implicit val fooDecoder: JsonDecoder[Foo] = Json.autoDecoder[Foo]
+  //   implicit val barDecoder: JsonDecoder[Bar] = Json.autoDecoder[Bar]
 
   //   val fooReuslt: Option[Foo] = fooJson.as[Foo]
   //   val fooAnswer              = Some(None)

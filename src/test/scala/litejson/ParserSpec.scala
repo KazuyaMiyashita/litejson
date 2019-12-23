@@ -2,7 +2,7 @@ package litejson
 
 import org.scalatest._
 
-class JsonParserSpec extends FunSuite with Matchers {
+class ParserSpec extends FunSuite with Matchers {
 
   test("parse") {
 

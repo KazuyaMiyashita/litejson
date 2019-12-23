@@ -2,7 +2,7 @@ package litejson
 
 import org.scalatest._
 
-class JsonFormatterSpec extends FunSuite with Matchers {
+class FormatterSpec extends FunSuite with Matchers {
 
   test("format") {
 

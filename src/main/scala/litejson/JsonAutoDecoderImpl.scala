@@ -2,9 +2,9 @@ package litejson
 
 import scala.reflect.macros.whitebox.Context
 
-object AutoDecoderImpl {
+object JsonAutoDecoderImpl {
 
-  def apply[T: c.WeakTypeTag](c: Context): c.Expr[Decoder[T]] = {
+  def apply[T: c.WeakTypeTag](c: Context): c.Expr[JsonDecoder[T]] = {
     import c.universe._
 
     val tag = weakTypeTag[T]
@@ -28,7 +28,7 @@ object AutoDecoderImpl {
 
     val code: String =
       s"""
-      |implicit object AnonAutoDecoder extends Decoder[${tag.tpe.toString}] {
+      |implicit object AnonAutoDecoder extends JsonDecoder[${tag.tpe.toString}] {
       |  override def decode(js: JsValue): Option[${tag.tpe.toString}] = js match {
       |    case obj: JsObject =>
       |      for {
@@ -41,7 +41,7 @@ object AutoDecoderImpl {
       |""".stripMargin
     // println(code) // DEBUG
 
-    c.Expr[Decoder[T]](c.parse(code))
+    c.Expr[JsonDecoder[T]](c.parse(code))
 
   }
 

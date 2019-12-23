@@ -14,10 +14,10 @@ object Json {
   def parse(input: String): Either[String, JsValue] = JsonParser(input)
   def format(value: JsValue): String                = JsonFormatter.spaces2(value)
 
-  def decode[T](js: JsValue)(implicit decoder: Decoder[T]): Option[T] = decoder.decode(js)
-  def autoDecoder[T]: Decoder[T] = macro AutoDecoderImpl[T]
+  def decode[T](js: JsValue)(implicit decoder: JsonDecoder[T]): Option[T] = decoder.decode(js)
+  def autoDecoder[T]: JsonDecoder[T] = macro JsonAutoDecoderImpl[T]
 
-  def encode[T](value: T)(implicit encoder: Encoder[T]): JsValue = encoder.encode(value)
-  def autoEncoder[T]: Encoder[T] = macro AutoEncoderImpl[T]
+  def encode[T](value: T)(implicit encoder: JsonEncoder[T]): JsValue = encoder.encode(value)
+  def autoEncoder[T]: JsonEncoder[T] = macro JsonAutoEncoderImpl[T]
 
 }

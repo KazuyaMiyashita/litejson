@@ -135,8 +135,8 @@ class AutoEncoderImplSpec extends FlatSpec with Matchers {
   //   val foo = Some(None)
   //   val bar = Some(None)
 
-  //   implicit val fooEncoder: Encoder[Foo] = Json.autoEncoder[Foo]
-  //   implicit val barEncoder: Encoder[Bar] = Json.autoEncoder[Bar]
+  //   implicit val fooEncoder: JsonEncoder[Foo] = Json.autoEncoder[Foo]
+  //   implicit val barEncoder: JsonEncoder[Bar] = Json.autoEncoder[Bar]
 
   //   val fooResult: JsValue = Json.encode(foo)
   //   val barResult: JsValue = Json.encode(bar)

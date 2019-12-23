@@ -39,7 +39,7 @@ class DecoderSpec extends FlatSpec with Matchers {
     import scala.util.Try
     import java.time.LocalDateTime
 
-    implicit object LocalDateTimeConverter extends Decoder[LocalDateTime] {
+    implicit object LocalDateTimeConverter extends JsonDecoder[LocalDateTime] {
       def ldtconvert(str: String): Option[LocalDateTime] = {
         Try(LocalDateTime.parse(str)).toOption
       }
@@ -149,7 +149,7 @@ class DecoderSpec extends FlatSpec with Matchers {
       "child" -> Json.nul
     )
 
-    implicit object PersonDecoder extends Decoder[Person] {
+    implicit object PersonDecoder extends JsonDecoder[Person] {
       override def decode(js: JsValue): Option[Person] = js match {
         case obj: JsObject =>
           for {
@@ -193,7 +193,7 @@ class DecoderSpec extends FlatSpec with Matchers {
       )
     )
 
-    implicit object PersonDecoder extends Decoder[Person] {
+    implicit object PersonDecoder extends JsonDecoder[Person] {
       override def decode(js: JsValue): Option[Person] = js match {
         case obj: JsObject =>
           for {

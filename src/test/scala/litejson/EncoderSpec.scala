@@ -131,7 +131,7 @@ class EncoderSpec extends FlatSpec with Matchers {
     case class Person(name: String, age: Int)
     val value = Person("Bob", 42)
 
-    implicit object PersonEncoder extends Encoder[Person] {
+    implicit object PersonEncoder extends JsonEncoder[Person] {
       override def encode(value: Person): JsValue = Json.obj(
         "name" -> Json.str(value.name),
         "age"  -> Json.num(value.age)
@@ -153,7 +153,7 @@ class EncoderSpec extends FlatSpec with Matchers {
     case class Person(name: String, age: Int)
     val value = Person("Bob", 42)
 
-    implicit object PersonEncoder extends Encoder[Person] {
+    implicit object PersonEncoder extends JsonEncoder[Person] {
       override def encode(value: Person): JsValue = Json.obj(
         "name" -> Json.str(value.name),
         "age"  -> Json.num(value.age)
